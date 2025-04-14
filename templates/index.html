@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U.E.A Padre José Cueto</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/57faba85b1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontello-css/fontello.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="cueto">
+            <div class="btn-menu">
+                <label for="btn-menu" class="icon-menu"></label>
+            </div>
+            <img src="{{ url_for('static', filename='imagenes/logo_new.png') }}" alt="Imagen del padre José Cueto"
+                class="img-cueto">
+        </div>
+    </header>
+
+    <input type="checkbox" id="btn-menu">
+    <div class="container-menu">
+        <div class="cont-menu">
+            <nav>
+                <form id="pestaña1" action="/" , method="POST"></form>
+                <form id="pestaña2" action="/login" , method="POST"></form>
+                <a href="#" class="icon-home" onclick="document.getElementById('pestaña1').submit(); return false;">
+                    Inicio</a>
+                <a href="#" class="icon-doc-text" onclick="document.getElementById('pestaña2').submit(); return false;">
+                    Sistema de Notas</a>
+            </nav>
+            <label for="" class="label-menu">Menú</label>
+            <label for="btn-menu" class="icon-cancel  equis"></label>
+        </div>
+    </div>
+    
+    <div class="contenedor">
+        <h1>Unidad Educativa Arquidiocesana Padre José Cueto</h1>
+        <div class="arrow" id="nextImage">&#10095;</div>
+    </div>
+
+    <div class="contenedor-secciones">
+        <div class="vision-section">
+            <h2>Nuestra Misión</h2>
+            <p class="justificado">
+                La Escuela Arquidiocesana Padre José Cueto tiene como misión ofrecer una educación de calidad, en
+                valores, que sea integral y de compromisos, fundamentada en los que Jesús de Nazaret propone como
+                proyecto de vida; dirigida a los niños y niñas más necesitados de los sectores de Betulio González,
+                Ma’vieja, Virgen de Fátima, Monseñor Romero, San Benito, Plaza, Paraíso y Ciudad del Sol. Con la
+                participación de toda la comunidad educativa, identificada cada vez más con el entorno generando cambios
+                sociales.
+            </p>
+            ─────────────────────────────────────────────────────────────────────────────────
+            </p>
+            <h2>Nuestra Visión</h2>
+            <p class="justificado">
+                La Institución se plantea su labor como una escuela Arquidiocesana de educación popular inspirada en la
+                filosofía de AVEC y de la Congregación Dominicas Misioneras de la Sagrada Familia (DMSF), en consonancia
+                con el Proyecto Educativo Regional y Nacional que aspira dinamizar los procesos organizativos y de
+                transformación de las comunidades de su entorno. Proyectada como un centro de atención de las familias,
+                a través de una formación que favorezca actitudes participativas que genere organizaciones donde se
+                resalte el ser de las personas, animándolas a asumir compromisos y responsabilidades colectivas;
+                celebrar la fe y los valores que encaminan hacia el Dios revelado por Jesús de Nazaret.
+            </p>
+            </p>
+            <p class="justificado ">
+                Se hace necesario mantener en el personal docente el papel de educadores populares en la escuela y en la
+                comunidad, con participación en una acción pastoral que anime al compromiso y potencie los valores a
+                vivencias; unos educadores preocupados por la superación personal y grupal, animados a conocer cada vez
+                más la realidad y el entorno de la comunidad.
+            </p>
+        </div>
+
+        <div class="organizacion-container">
+            <h2>Organización</h2>
+            <p><strong>Directora:</strong> Lcda. Marisela Peraza.</p>
+            <p><strong>Años de Experiencia:</strong> 41 Años de su Fundación</p>
+            <p><strong>Matrícula:</strong> 466 Estudiantes</p>
+            <p><strong>Educación Inicial:</strong> Salas de 4º a 5º Años</p>
+            <p><strong>Educación Básica:</strong> De 1er Grado a 6to Grado</p>
+            <p><strong>Educación Media:</strong> De 1er año a 2do año</p>
+            <p><strong>P.E.I.C:</strong> "De la mano con la Comunidad Educativa y los valores cristianos transformamos
+                una Escuela Productiva."</p>
+            <p><em> “La educación es el único bien heredable que podemos dejarle a las futuras generaciones”</em></p>
+        </div>
+    </div>
+    <div class="map-container">
+        <h1 class="titulo.mapa">Visítanos</h1>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1386.7897030149607!2d-71.63635329463138!3d10.54520158853411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e8996ec66e7b8f1%3A0x816e69c59f73b9a1!2sUnidad%20Educativa%20Arquidiocesana%20Padre%20Jos%C3%A9%20Cueto!5e0!3m2!1ses-419!2sve!4v1570628297251!5m2!1ses-419!2sve"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Información de Contacto:</strong></p>
+                    <p>Email: ezapadrejosecueto@yahoo.com</p>
+                    <p>Teléfono: +58 0261-7171247</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="margin-left-50 clearfix">
+                        <p class="margin-bottom-10"><strong>Síguenos</strong></p>
+                        <a href="https://www.facebook.com/escuelasaquidiocesanas.demaracaibo"
+                            class="fa-brands fa-facebook fa-bounce" data-toggle="tooltip" data-placement="top"
+                            title="Facebook">
+                            <i class="icon-facebook"></i>
+                        </a>
+                        <a href="https://www.youtube.com/channel/UCx6cSTxthW0NP7vV1GsCClw"
+                            class="fa-brands fa-youtube fa-bounce" data-toggle="tooltip" data-placement="top"
+                            title="YouTube">
+                            <i class="icon-youtube"></i>
+                        </a>
+                        <a href="https://wa.me/584146427706" class="fa-brands fa-whatsapp fa-bounce"
+                            data-toggle="tooltip" data-placement="top" title="WhatsApp">
+                            <i class="fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.instagram.com/arquidiocesanas" class="fa-brands fa-instagram fa-bounce"
+                            data-toggle="tooltip" data-placement="top" title="Instagram">
+                            <i class="fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.body.style.background = "linear-gradient(to right, rgba(1, 20, 96, 0.4) 0 35%, rgba(161, 161, 161, 0.6) 99% 100%), url('./static/imagenes/cueto4.jpeg') no-repeat center center fixed";
+        document.body.style.backgroundSize = "cover";
+
+        const logoUrl = "{{ url_for('static', filename='imagenes/logo_new.png') }}";
+
+        const images = [
+            "./static/imagenes/cueto3.jpeg",
+            "./static/imagenes/cueto4.jpeg",
+            "./static/imagenes/cuetofr.jpg",
+            "./static/imagenes/cueto1.jpeg"
+        ];
+
+        let currentIndex = 0;
+
+        document.getElementById('nextImage').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            document.body.style.backgroundImage = `linear-gradient(to right, rgba(1, 20, 96, 0.4) 0 35%, rgba(161, 161, 161, 0.6) 99% 100%), url("${images[currentIndex]}")`;
+        });
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % images.length;
+            document.body.style.backgroundImage = `linear-gradient(to right, rgba(1, 20, 96, 0.4) 0 35%, rgba(161, 161, 161, 0.6) 99% 100%), url("${images[currentIndex]}")`;
+        }, 5000);
+
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+    <script type="text/javascript">
+        function preventBack(){
+            window.history.forward();
+        }
+        setTimeout("preventBack()", 0);
+
+        window.onunload = function(){ null };
+    </script>
+</body>
+
+</html>

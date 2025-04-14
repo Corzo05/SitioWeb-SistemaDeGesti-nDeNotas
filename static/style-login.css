@@ -1,0 +1,360 @@
+body{
+    margin: 0;
+    background: linear-gradient(to right, rgba(1, 20, 96, 0.6) 0 50%, white 99% 100%);
+}
+
+.main h5{
+    margin: 0;
+}
+
+.main h1{
+    animation: heartbeat 15s infinite;
+    margin-top: 2px;
+}
+
+@keyframes heartbeat {
+    14% {
+        transform: scale(1.1);
+    }
+    29% {
+        transform: scale(1);
+    }
+    43% {
+        transform: scale(1.1);
+    }
+    57% {
+        transform: scale(1);
+    }
+    62% {
+        transform: scale(1.1);
+    }
+    76% {
+        transform: scale(1);
+    }
+    90% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.btn-menu label{
+    color: #fff;
+    cursor: pointer;
+    font-size: 25px;
+    margin-right: 8px;
+}
+
+.btn-menu label:hover{
+    transition: all .7s ease;
+    transform: scale(1.25);
+}
+
+#btn-menu{
+    display: none;
+}
+
+.container-menu{
+    position: fixed;
+    background: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transition: all 500ms ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10;
+}
+
+
+#btn-menu:checked ~ .container-menu{
+    opacity: 1;
+    visibility: visible;
+    overflow: hidden;
+}
+
+
+.cont-menu{
+    width: 100%;
+    max-width: 250px;
+    background: #3a3a3a;
+    height: 100vh;
+    position: relative;
+    transition: all 500ms ease;
+    transform: translateX(-100%);
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+#btn-menu:checked ~ .container-menu .cont-menu{
+    transform: translateX(0%);
+}
+
+.cont-menu nav{
+    transform: translateY(45%);
+}
+
+.cont-menu nav a{
+    display: block;
+    padding: 20px;
+    color: #fff;
+    border-left: 5px solid transparent;
+    transition: all 400ms ease;
+}
+
+.cont-menu nav a:hover{
+    border-left: 5px solid #c7c7c7;
+    background: #1f1f1f;
+    transform: translate(5px, -5px);
+}
+
+.equis{
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.equis:hover{
+    transition: all .3s ease;
+    transform: scale(1.5);
+}
+
+.label-menu{
+    color: #fff;
+    font-size: 25px;
+    position: absolute;
+    left: 34%;
+    top: 2%;
+}
+
+.logo-escuelas{
+    border-radius: 25px;
+    width: 225px;
+    height: 100px;
+    position: absolute;
+    bottom: 6%;
+    left: 5%;
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 86vh;
+}
+
+.box{
+    position: relative;
+    width: 380px;
+    height: 400px;
+    background: #1c1c1c;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all .7s ease;
+}
+
+.box:hover{
+    transform: scale(1.05);
+}
+
+.box::before{
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 380px;
+    height: 420px;
+    background: linear-gradient(0deg, transparent, transparent, white, white, white);
+    z-index: 1;
+    animation: animate 6s linear infinite;
+    transform-origin: bottom right;
+}
+
+.box::after{
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 380px;
+    height: 420px;
+    background: linear-gradient(0deg, transparent, transparent, white, white, white);
+    z-index: 1;
+    animation: animate 6s linear infinite;
+    transform-origin: bottom right;
+    animation-delay: -3s;
+}
+
+.borderline{
+    position: absolute;
+    top: 0;
+    inset: 0;
+}
+
+.borderline::before{
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 380px;
+    height: 420px;
+    background: linear-gradient(0deg, transparent, transparent, blue, blue, blue);
+    z-index: 1;
+    animation: animate 6s linear infinite;
+    transform-origin: bottom right;
+    animation-delay: -1.5s;
+}
+
+.borderline::after{
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 380px;
+    height: 420px;
+    background: linear-gradient(0deg, transparent, transparent, blue, blue, blue);
+    z-index: 1;
+    animation: animate 6s linear infinite;
+    transform-origin: bottom right;
+    animation-delay: -4.5s;
+}
+
+@keyframes animate {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+.box form{
+    position: absolute;
+    inset: 4px;
+    background: #222;
+    padding: 50px 40px;
+    border-radius: 8px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.box form h2{
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 0.1em;
+}
+
+.box form .inputbox{
+    position: relative;
+    width: 300px;
+    margin-top: 35px;
+}
+
+.box form .inputbox input{
+    position: relative;
+    width: 100%;
+    padding: 20px 10px 10px;
+    background: transparent;
+    outline: none;
+    box-shadow: none;
+    color: #23242a;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
+    z-index: 10;
+    border: none;
+}
+
+.box form .inputbox span{
+    position: absolute;
+    left: 0;
+    padding: 20px 0px 10px;
+    pointer-events: none;
+    color: #8f8f8f;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
+}
+
+.box form .inputbox input:valid ~ span,
+.box form .inputbox input:focus ~ span{
+    color: #fff;
+    font-size: 0.75em;
+    transform: translateY(-34px);
+}
+
+.box form .inputbox i{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.box form .inputbox input:valid ~ i,
+.box form .inputbox input:focus ~ i{
+    height: 44px;
+}
+
+.box form input[type="submit"]{
+    border: none;
+    outline: none;
+    padding: 9px 25px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.9em;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-top: 30px;
+}
+
+.box form input[type="submit"]:active{
+    opacity: 0.8;
+}
+
+a{
+    text-decoration: none;
+    color:white;
+}
+
+header{
+    display: flex;
+    height: 80px;
+    background: linear-gradient(rgba(1, 20, 96), rgba(1, 20, 96));
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.cueto{
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+}
+
+.cueto h2{
+    font-size: 25px;
+    margin-top: 8px;
+}
+
+@media(max-width:700px){
+    header{
+        flex-direction: column;
+    }
+
+    nav{
+        padding: 10px 0px;
+    }
+}

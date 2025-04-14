@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar / Editar Estudiante - G.N.C</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/style-sistema-agregar.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontello-css/fontello.css') }}">
+</head>
+<body>
+    <header>
+        <a href="#" class="cueto">
+            <div class="btn-menu">
+                <label for="btn-menu" class="icon-menu"></label>
+            </div>
+            <h2 class="nombre-liceo">
+                Unidad Educativa Arquidiocesana<br>Padre José Cueto
+            </h2>
+        </a>
+        <div class="contenedor-usuario-salir">
+            <div class="contenedor-usuario">
+                <div class="imagen_usuario">
+                    <img src="{{ url_for('static', filename='imagenes/perfil.png') }}" alt="usuario" class="foto-usuario">
+                </div>
+                <div class="labels-usuario">
+                    <label for="" class="usuario">{{ nombre_admin }}</label>
+                    <label for="" class="rol">{{ rol_admin }}</label>
+                </div>
+            </div>
+            <form id="form-salir" action="/home" method="POST">
+                <button class="boton-index  icon-cancel  boton-salir" type="submit" id="boton-salir">Salir</button>
+            </form>
+        </div>
+    </header>
+    <div class="titulo-sistema">
+        <h1>G.N.C</h1>
+    </div>
+    <input type="checkbox" id="btn-menu">
+    <div class="container-menu">
+        <div class="cont-menu">
+            <nav>
+                <form id="pestaña1" action="/pestaña-agregar", method="POST"></form>
+                <form id="pestaña2" action="/pestaña-eliminar", method="POST"></form>
+                <form id="pestaña3" action="/pestaña-lapsos", method="POST"></form>
+                <form id="pestaña4" action="/sistema", method="POST"></form>
+                <form id="pestaña5" action="/pestañaReportes", method="POST"></form>
+                <form id="pestaña6" action="/pestaña-users", method="POST"></form>
+                    <a href="#" class="icon-user-add" onclick="document.getElementById('pestaña1').submit(); return false;" {% if val_admin == 'Docente' %}style="pointer-events: none; color: grey; text-decoration: line-through; opacity: 0.3;"{% endif %}> Agregar / Editar</a>
+                    <a href="#" class="icon-user-times" onclick="document.getElementById('pestaña2').submit(); return false;" {% if val_admin == 'Docente' %}style="pointer-events: none; color: grey; text-decoration: line-through; opacity: 0.3;"{% endif %}> Eliminar</a>
+                    <a href="#" class="icon-doc-text" onclick="document.getElementById('pestaña3').submit(); return false;"> Momentos</a>
+                    <a href="#" class="icon-file-archive" onclick="document.getElementById('pestaña4').submit(); return false;" {% if val_admin == 'Docente' %}style="pointer-events: none; color: grey; text-decoration: line-through; opacity: 0.3;"{% endif %}> Notas Finales</a>
+                    <a href="#" class="icon-file-pdf" onclick="document.getElementById('pestaña5').submit(); return false;" {% if val_admin == 'Docente' %}style="pointer-events: none; color: grey; text-decoration: line-through; opacity: 0.3;"{% endif %}> Generar Reportes</a>
+                    <a href="#" class="icon-torso" onclick="document.getElementById('pestaña6').submit(); return false;" {% if val_admin == 'Docente' %}style="pointer-events: none; color: grey; text-decoration: line-through; opacity: 0.3;"{% endif %}> Administradores</a>
+            </nav>
+            <label for="" class="label-menu">Menú</label>
+            <label for="btn-menu" class="icon-cancel  equis"></label>
+            <img class="logo-escuelas" src="{{ url_for('static', filename='imagenes/logo_new.png') }}" alt="logo">
+        </div>
+    </div>
+    <div class="container-fluid mt-4  contenedor-principal">
+        <div class="card  card-anterior">
+            <div class="card-body  contenedor-titulo-seccion">
+                <div class="contenedor_barra">
+                    <input type="text" id="barra-agregar" placeholder="Buscar" class="hidden-input">
+                    <div class="boton_lupa">
+                        <i class="icon-search  lupa"></i>
+                    </div>
+                </div>
+                <h2 class="text-center text-white  label-agregar">Agregar Estudiante - Sección "A"</h2>
+                {% if mensajeNyC %}
+                    <script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: '{{ mensaje }}',
+                            timer: 2000,
+                            timerProgressBar: true,
+                            showConfirmButton: false
+                        });
+                    </script>
+                {% endif %}
+                <form id="formulario-agregarA" action="/agregar-estudiante-A", method="POST">
+                    <div class="form-group d-flex align-items-center mb-3">
+                        <div class="col-4  campos">
+                            <label class="text-white">Nombre Completo</label>
+                            <input type="text" class="form-control mb-3" id="nombre_completo_A" name="nombre_completo_A">
+                        </div>
+                        <div class="col-sm-1  campos">
+                            <label class="text-white">Sexo</label>
+                            <select name="sexo_A" id="sexo_A" class="form-select mb-3">
+                                <option value="" selected disabled hidden></option>
+                                <option value="M">M</option>
+                                <option value="F">F</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2  campos">
+                            <label class="text-white">Cédula</label>
+                            <input type="text" class="form-control mb-3" id="cedula_A" name="cedula_A">
+                        </div>
+                        <div class="campos">
+                            <button class="btn btn-primary mb-3 mt-4" type="submit" id="btn_agregar_A">Agregar Estudiante</button>
+                        </div>
+                        <div>
+                            <img src="{{ url_for('static', filename='imagenes/perfil.png') }}" alt="imagen de notas" class="mx-3 w-25 rounded-circle">
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Tabla A-->
+                <table class="table table-bordered rounded table-striped table align-middle table-hover borde-tablas">
+                        
+                            <thead class="text-center align-middle table-dark">
+                                <th scope="col">Nro.</th>
+                                <th scope="col">Nombre Completo</th>
+                                <th scope="col">Sexo</th>
+                                <th scope="col">Cédula</th>
+                                <th scope="col" class="encabezado-botones">Editar</th>
+                            </thead>
+
+                        <tbody class="text-center align-middle table-secondary" id="tablas-agregar">
+                            {% for d in dataRegistro %}
+                                <tr>
+                                    <td>{{d.Nro}}</td>
+                                    <td>{{d.Nombre_completo}}</td>
+                                    <td>{{d.Sexo}}</td>
+                                    <td>{{d.Cedula}}</td>
+                                    <input type="hidden" value="{{d.Cedula}}" id="input-cedula">
+                                    <input type="hidden" value="{{d.Nombre_completo}}" id="input-nombre"> 
+                                    <td><button class="btn btn-primary btn-sm  editButtonA" id="btn-editarA{{d.Nro}}" data-bs-toggle="modal" data-bs-target="#modalA{{d.Nro}}">Editar Datos</button></td>
+                                </tr>
+
+                                <!-- modal -->
+                                <div class="modal fade" id="modalA{{d.Nro}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header border-2">
+                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Editar Datos Estudiante - Sección "A"</h1>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h1 class="modal-title fs-5 text-white mb-3" id="exampleModalLabel">Estudiante: <br> "{{d.Nombre_completo}}"</h1>
+                                                <form class="editFormA" id="formulario-editarA" action="/editarA/{{d.Nro}}", method="POST">
+                                                    <div class="d-flex">
+                                                        <div class="col mx-2 text-white">
+                                                            <label>Nombre Completo</label>
+                                                            <input type="text" class="form-control mb-3" id="edit_nombre_completo_A" name="nombre_completo" value="{{d.Nombre_completo}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <div class="col-2 mx-2 text-white">
+                                                            <label>Sexo</label>
+                                                            <select name="sexo" id="edit_sexo_A" class="form-select mb-3">
+                                                                <option value="{{d.Sexo}}" selected hidden>{{d.Sexo}}</option>
+                                                                <option value="M">M</option>
+                                                                <option value="F">F</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-4 mx-2 text-white">
+                                                            <label>Cédula</label>
+                                                            <input type="text" class="form-control mb-3" id="edit_cedula_A" name="cedula" value="{{d.Cedula}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer border-2">
+                                                        <button type="submit" class="btn btn-primary" id="btn_editarA">Guardar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-4  contenedor-principal">
+        <div class="card card-anterior">
+            <div class="card-body  contenedor-titulo-seccion">
+                <h2 class="text-center text-white">Agregar Estudiante - Sección "B"</h2>
+                <form id="formulario-agregarB" action="/agregar-estudiante-B", method="POST">
+                    <div class="form-group d-flex align-items-center mb-3">
+                        <div class="col-4  campos">
+                            <label class="text-white">Nombre Completo</label>
+                            <input type="text" class="form-control mb-3" id="nombre_completo_B" name="nombre_completo_B">
+                        </div>
+                        <div class="col-sm-1  campos">
+                            <label class="text-white">Sexo</label>
+                            <select name="sexo_B" id="sexo_B" class="form-select mb-3">
+                                <option value="" selected disabled hidden></option>
+                                <option value="M">M</option>
+                                <option value="F">F</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2  campos">
+                            <label class="text-white">Cédula</label>
+                            <input type="text" class="form-control mb-3" id="cedula_B" name="cedula_B">
+                        </div>
+                        <div class="campos">
+                            <button class="btn btn-primary mb-3 mt-4" type="submit" id="btn_agregar_B">Agregar Estudiante</button>
+                        </div>
+                        <div>
+                            <img src="{{ url_for('static', filename='imagenes/perfil.png') }}" alt="imagen de notas" class="mx-3 w-25 rounded-circle">
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Tabla B-->
+                <table class="table table-bordered rounded table-striped table align-middle table-hover borde-tablas">
+                        
+                        <thead class="text-center align-middle table-dark">
+                            <th scope="col">Nro.</th>
+                            <th scope="col">Nombre Completo</th>
+                            <th scope="col">Sexo</th>
+                            <th scope="col">Cédula</th>
+                            <th scope="col" class="encabezado-botones">Editar</th>
+                        </thead>
+
+                    <tbody class="text-center align-middle table-secondary" id="tablas-agregar">
+                        {% for d in dataRegistroB %}
+                            <tr>
+                                <td>{{d.Nro}}</td>
+                                <td>{{d.Nombre_completo}}</td>
+                                <td>{{d.Sexo}}</td>
+                                <td>{{d.Cedula}}</td>
+                                <input type="hidden" value="{{d.Cedula}}" id="input-cedulaB">
+                                <input type="hidden" value="{{d.Nombre_completo}}" id="input-nombreB"> 
+                                <td><button class="btn btn-primary btn-sm  editButtonB" id="btn-editarB{{d.Nro}}" data-bs-toggle="modal" data-bs-target="#modalB{{d.Nro}}">Editar Datos</button></td>
+                            </tr>
+
+                            <!-- modal -->
+                            <div class="modal fade" id="modalB{{d.Nro}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-2">
+                                            <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Editar Datos Estudiante - Sección "B"</h1>
+                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h1 class="modal-title fs-5 text-white mb-3" id="exampleModalLabel">Estudiante: <br> "{{d.Nombre_completo}}"</h1>
+                                            <form class="editFormB" id="formulario-editarB" action="/editarB/{{d.Nro}}", method="POST">
+                                                <div class="d-flex">
+                                                    <div class="col mx-2 text-white">
+                                                        <label>Nombre Completo</label>
+                                                        <input type="text" class="form-control mb-3" id="edit_nombre_completo_B" name="nombre_completo" value="{{d.Nombre_completo}}">
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <div class="col-2 mx-2 text-white">
+                                                        <label>Sexo</label>
+                                                        <select name="sexo" id="edit_sexo_B" class="form-select mb-3">
+                                                            <option value="{{d.Sexo}}" selected hidden>{{d.Sexo}}</option>
+                                                            <option value="M">M</option>
+                                                            <option value="F">F</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-4 mx-2 text-white">
+                                                        <label>Cédula</label>
+                                                        <input type="text" class="form-control mb-3" id="edit_cedula_B" name="cedula" value="{{d.Cedula}}">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer border-2">
+                                                    <button type="submit" class="btn btn-primary" id="btn_editarB">Guardar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/detalles.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/alertas.js') }}"></script>
+    <script type="text/javascript">
+        function preventBack(){
+            window.history.forward();
+        }
+        setTimeout("preventBack()", 0);
+
+        window.onunload = function(){ null };
+    </script>
+</body>
+</html>

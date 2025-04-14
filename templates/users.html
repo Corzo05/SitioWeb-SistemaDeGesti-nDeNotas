@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administradores - G.N.C</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/style-sistema-users.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontello-css/fontello.css') }}">
+</head>
+<body>
+    <header>
+        <a href="#" class="cueto">
+            <div class="btn-menu">
+                <label for="btn-menu" class="icon-menu"></label>
+            </div>
+            <h2 class="nombre-liceo">
+                Unidad Educativa Arquidiocesana<br>Padre José Cueto
+            </h2>
+        </a>
+        <div class="contenedor-usuario-salir">
+            <div class="contenedor-usuario">
+                <div class="imagen_usuario">
+                    <img src="{{ url_for('static', filename='imagenes/perfil.png') }}" alt="usuario" class="foto-usuario">
+                </div>
+                <div class="labels-usuario">
+                    <label for="" class="usuario">{{ nombre_admin }}</label>
+                    <label for="" class="rol">{{ rol_admin }}</label>
+                </div>
+            </div>
+            <form id="form-salir" action="/home" method="POST">
+                <button class="boton-index  icon-cancel  boton-salir" type="submit" id="boton-salir">Salir</button>
+            </form>
+        </div>
+    </header>
+    <div class="titulo-sistema">
+        <h1>G.N.C</h1>
+    </div>
+    <input type="checkbox" id="btn-menu">
+    <div class="container-menu">
+        <div class="cont-menu">
+            <nav>
+                <form id="pestaña1" action="/pestaña-agregar", method="POST"></form>
+                <form id="pestaña2" action="/pestaña-eliminar", method="POST"></form>
+                <form id="pestaña3" action="/pestaña-lapsos", method="POST"></form>
+                <form id="pestaña4" action="/sistema", method="POST"></form>
+                <form id="pestaña5" action="/pestañaReportes", method="POST"></form>
+                <form id="pestaña6" action="/pestaña-users", method="POST"></form>
+                    <a href="#" class="icon-user-add" onclick="document.getElementById('pestaña1').submit(); return false;" {% if val_admin == 'Docente' %}style="pointer-events: none; color: grey; text-decoration: line-through; opacity: 0.3;"{% endif %}> Agregar / Editar</a>
+                    <a href="#" class="icon-user-times" onclick="document.getElementById('pestaña2').submit(); return false;" {% if val_admin == 'Docente' %}style="pointer-events: none; color: grey; text-decoration: line-through; opacity: 0.3;"{% endif %}> Eliminar</a>
+                    <a href="#" class="icon-doc-text" onclick="document.getElementById('pestaña3').submit(); return false;"> Momentos</a>
+                    <a href="#" class="icon-file-archive" onclick="document.getElementById('pestaña4').submit(); return false;" {% if val_admin == 'Docente' %}style="pointer-events: none; color: grey; text-decoration: line-through; opacity: 0.3;"{% endif %}> Notas Finales</a>
+                    <a href="#" class="icon-file-pdf" onclick="document.getElementById('pestaña5').submit(); return false;" {% if val_admin == 'Docente' %}style="pointer-events: none; color: grey; text-decoration: line-through; opacity: 0.3;"{% endif %}> Generar Reportes</a>
+                    <a href="#" class="icon-torso" onclick="document.getElementById('pestaña6').submit(); return false;" {% if val_admin == 'Docente' %}style="pointer-events: none; color: grey; text-decoration: line-through; opacity: 0.3;"{% endif %}> Administradores</a>
+            </nav>
+            <label for="" class="label-menu">Menú</label>
+            <label for="btn-menu" class="icon-cancel  equis"></label>
+            <img class="logo-escuelas" src="{{ url_for('static', filename='imagenes/logo_new.png') }}" alt="logo">
+        </div>
+    </div>
+    <div class="container-fluid mt-4  contenedor-principal">
+        <div class="card card-anterior">
+            <div class="card-body contenedor-titulo-seccion">
+                <h2 class="text-center text-white"> Gestionar Administradores</h2>
+                
+                <img class="imagen-usuario" src="{{ url_for('static', filename='imagenes/perfil.png') }}" alt="imagen de notas" class="mx-3 w-25 rounded-circle">
+                
+                <a href="{{url_for('reinicio_numeracion_usuarios')}}" class="btn-numeracion  icon-list-numbered" id="btn_reiniciar_numeracion">Reiniciar Numeración</a>
+
+                <form id="formulario-agregar-administradores" action="/agregar-administrador", method="POST">
+                    <div class="form-group d-flex align-items-center mb-3">
+                        <div class="col-2  campos">
+                            <label class="text-white">Nombre y Apellido</label>
+                            <input type="text" class="form-control mb-3" id="nombre" name="nombre">
+                        </div>
+                        <div class="col-2  campos">
+                            <label class="text-white">Usuario</label>
+                            <input type="text" class="form-control mb-3" id="usuario" name="usuario">
+                        </div>
+                        <div class="col-2  campos">
+                            <label class="text-white">Contraseña</label>
+                            <input type="text" class="form-control mb-3" id="contraseña" name="contraseña">
+                        </div>
+                        <div class="col-2  campos">
+                            <label class="text-white">Rol</label>
+                            <div class="contenedor-select">
+                                <select name="rol" id="rol" class="form-select mb-3">
+                                    <option value="" disabled selected hidden>Seleccionar</option>
+                                    <option value="Jefe de Control de Estudios">Jefe de Control de Estudios</option>
+                                    <option value="Docente">Docente</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-2  campos">
+                            <label class="text-white">Materia</label>
+                            <div class="contenedor-select-materia">
+                                <select name="materia" id="materia" class="form-select mb-3">
+                                    <option value="" disabled selected hidden>Seleccionar</option>
+                                    <option value="No Aplica">No Aplica</option>
+                                    <option value="Castellano">Castellano</option>
+                                    <option value="Matemática">Matemática</option>
+                                    <option value="GHC">GHC</option>
+                                    <option value="Religión">Religión</option>
+                                    <option value="Biología">Biología</option>
+                                    <option value="Computación">Computación</option>
+                                    <option value="Inglés">Inglés</option>
+                                    <option value="Arte">Arte</option>
+                                    <option value="Educación Física">Educación Física</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="campos">
+                            <button class="btn btn-primary mb-3 mt-4 btn-sm" type="submit" id="btn_agregar_admin">Agregar Administrador</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Tabla A-->
+                <table class="table table-bordered rounded table-striped table align-middle table-hover borde-tablas">
+                        
+                            <thead class="text-center align-middle table-dark">
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre y Apellido</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Contraseña</th>
+                                <th scope="col">Rol</th>
+                                <th scope="col">Materia</th>
+                                <th scope="col" class="encabezado-botones">Editar Administrador</th>
+                                <th scope="col" class="encabezado-botones">Eliminar Administrador</th>
+                            </thead>
+
+                        <tbody class="text-center align-middle table-secondary">
+                            {% for d in dataAdmins %}
+                                <tr>
+                                    <td>{{d.ID}}</td>
+                                    <td>{{d.Nombre_apellido}}</td>
+                                    <td>{{d.Usuario}}</td>
+                                    <td>{{d.Contraseña}}</td>
+                                    <td>{{d.Rol}}</td>
+                                    <td>{{d.Materia}}</td>
+                                    <td><button class="btn btn-primary btn-sm  editAdmins" id="btn-editar-admins{{d.ID}}" data-bs-toggle="modal" data-bs-target="#modalAdmins{{d.ID}}">Editar Administrador</button></td>
+                                    <td><a href="{{url_for('eliminarAdmins', id=d.ID)}}" class="btn btn-danger btn-sm boton-eliminar" id="btn-eliminarAdmins">Eliminar</a></td>
+                                </tr>
+
+                                <!-- modal -->
+                                <div class="modal fade" id="modalAdmins{{d.ID}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header border-2">
+                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Editar Administrador: {{d.Nombre_apellido}}</h1>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="editFormAdmins" id="formulario-editar-admins" action="/editarAdmins/{{d.ID}}", method="POST">
+                                                    <div class="d-flex">
+                                                        <div class="col-6 mx-2 text-white">
+                                                            <label>Nombre y Apellido</label>
+                                                            <input type="text" class="form-control mb-3" id="edit_nombre" name="edit_nombre" value="{{d.Nombre_apellido}}">
+                                                        </div>
+                                                        <div class="col-5 mx-2 text-white">
+                                                            <label>Usuario</label>
+                                                            <input type="text" class="form-control mb-3" id="edit_usuario" name="edit_usuario" value="{{d.Usuario}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <div class="col-6 mx-2 text-white">
+                                                            <label>Contraseña</label>
+                                                            <input type="text" class="form-control mb-3" id="edit_contraseña" name="edit_contraseña" value="{{d.Contraseña}}">
+                                                        </div>
+                                                        <div class="col-4 mx-2 text-white">
+                                                            <label>Rol</label>
+                                                            <div class="contenedor-select">
+                                                                <select name="edit_rol" id="select_rol" class="form-select mb-3 w-100">
+                                                                    <option value="{{d.Rol}}" selected hidden>{{d.Rol}}</option>
+                                                                    <option value="Jefe de Control de Estudios">Jefe de Control de Estudios</option>
+                                                                    <option value="Docente">Docente</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <div class="mx-2">
+                                                            <label class="text-white">Materia</label>
+                                                            <div class="contenedor-select-materia-modal">
+                                                                <select name="edit_materia" id="select_materia" class="form-select mb-3">
+                                                                    <option value="{{d.Materia}}" selected hidden>{{d.Materia}}</option>
+                                                                    <option value="No Aplica">No Aplica</option>
+                                                                    <option value="Castellano">Castellano</option>
+                                                                    <option value="Matemática">Matemática</option>
+                                                                    <option value="GHC">GHC</option>
+                                                                    <option value="Religión">Religión</option>
+                                                                    <option value="Biología">Biología</option>
+                                                                    <option value="Computación">Computación</option>
+                                                                    <option value="Inglés">Inglés</option>
+                                                                    <option value="Arte">Arte</option>
+                                                                    <option value="Educación Física">Educación Física</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer border-2">
+                                                        <button type="submit" class="btn btn-primary" id="btn_editarAdmins">Guardar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/detalles.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/alertas2.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/alertas.js') }}"></script>
+    <script type="text/javascript">
+        function preventBack(){
+            window.history.forward();
+        }
+        setTimeout("preventBack()", 0);
+
+        window.onunload = function(){ null };
+    </script>
+</body>
+</html>
